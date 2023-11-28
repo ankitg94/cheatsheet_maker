@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Cheatsheet_template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="prism.css">
+        <script src="prism.js"></script>
+    </head>
+    <body>    
+        <nav>
+            <span class="logo"><img src="./assests/Alogo.jpg"></span>
+            <div> javascript-cheatsheeet for u</div>
+        </nav>
+<!--main started here-->
+        <div class="main">
+        <div class="main1">
+        <img  class="photo"src="./assests/Alogo.jpg">
+
+        <h1 class="head">html boilerplate</h1> 
+        <ol class="desc">
+        <li>boilerplate code</li>
+        <li>css file,javascript file connected</li>
+       </ol>
+  
+        </div>
+        <div class="main2">
+            <pre class="language-html">
+                <code>                  
+&lthtml&gt;
+&lthead&gt;
+&ltmeta charset="utf-8"&gt;
+&ltmeta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+&lttitle&gt; &lt/title&gt;
+&ltmeta name="description" content=""&gt;
+&ltmeta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&ltlink rel="stylesheet" href="css folder name"&gt;
+&lt/head&gt;
+&ltbody&gt;       
+&ltscript src="javascript folder name"&gt &lt/script&gt
+&lt/body&gt
+&lt/html&gt
+ 
+                </code>
+             </pre>
+        </div>
+        </div>
+<!--main one endeded here-->
+<!--main2 started here-->
+<div class="main">
+    <div class="main2">
+        <pre class="language-javascript" id="prism_str">
+            <code>  
+                //bg color logics
+                const br = document.querySelectorAll('.button')
+                const body   = document.querySelector('body')
+                
+                  br.forEach( function (button){
+                  button.addEventListener('click',function(e){
+                   console.log(e.target);
+                   if(e.target.id==='grey'){
+                      body.style.backgroundColor=e.target.id
+                   }
+                   if(e.target.id==='white'){
+                       body.style.backgroundColor=e.target.id
+                    }
+                    if(e.target.id==='blue'){
+                       body.style.backgroundColor=e.target.id
+                    }
+                    if(e.target.id==='yellow'){
+                        body.style.backgroundColor=e.target.id
+                     }
+                  })
+                })
+                
+                
+                //02-bmi calculator logic
+                //use case
+                //const wt = parseInt(document.querySelector('#weight').value)
+                
+                const form = document.querySelector('form')
+                form.addEventListener('submit',function(e){
+                   e.preventDefault() //submit karne se rokta hai 
+                   const ht =  parseInt(document.querySelector('#height').value)
+                   const wt = parseInt(document.querySelector('#weight').value)
+                   const rt = document.querySelector('#results')
+                   if(ht===''||ht<0||isNaN(ht)){
+                    rt.innerHTML=`Please give a vlaid  height ${ht}`;
+                   }
+                   else if(wt===''||wt<0||isNaN(wt)){
+                      rt.innerHTML=`Please give a vlaid  weight ${wt}`;
+                   }
+                   else{
+                       const bmi =((wt/((ht*ht)/1000)).toFixed(2))
+                      //show the result
+                      rt.innerHTML =`<span>${bmi}</span>`   
+                      }
+                })
+                //03 clock logic 
+                 const clock = document.getElementById('clock')
+                 const dt = document.getElementById('dt')
+                setInterval(function () {
+                   let clk  = new Date();
+                   clock.innerHTML=clk.toLocaleTimeString()
+                },1000)
+                 
+                setInterval(function(){
+                   let dtr = new Date();
+                   dt.innerHTML = dtr.toDateString()
+                },1000) 
+               </code>
+            </pre>
+       </div>
+    <div class="main1">
+    <img  class="photo"src="./assests/js-basic1.png">
+    <img  class="photo"src="./assests/js-basic2.png">
+    <h1 class="head">02-Js-basic Project</h1> 
+    <ol class="desc">
+    <li>theme mode</li>
+    <li>Bmi</li>
+    <li>local time</li>
+   </ol>
+    </div>
+       </div>           
+    <!--main two ended here-->
+    <!--main three  start here-->
+    <div class="main">
+        <div class="main1">
+            <img  class="photo"src="./assests/noguess.png">
+            <img  class="photo"src="./assests/noguess1.png">
+            <h1 class="head">03-Game Project</h1> 
+            <ol class="desc">
+            <li>automatatic color creator</li>
+            <li>No guess Game</li>
+            
+           </ol>
+            </div>
+        <div class="main2">
+            <pre class="language-javascript" id="prism_str">
+                <code>  
+                    
+//genrate the random color
+const randomcolor=function(){
+    const hex ="0123456789ABCDEF"
+    let color = '#'
+    for(let i=0; i<6;i++){
+     color +=hex[Math.floor(Math.random()*16)]
+     
+    }
+    return color;
+}
+let  intervalId 
+startchanging = function(){
+    intervalId =setInterval(changeBgColor,1000);
+    function changeBgColor(){
+    document.body.style.backgroundColor =randomcolor()
+}
+}
+stopchanging =function(){
+    clearInterval(intervalId)
+    intervalId =null;
+}
+document.querySelector('#start').addEventListener('click',startchanging,false)
+document.querySelector('#stop').addEventListener('click',stopchanging,false)
+//guessing game 
+//04-guess no 
+let randomNo = parseInt(Math.random()*100+1)  
+const userInput = document.querySelector("#guessField")
+const submit  = document.querySelector("#subt") 
+const guessSlot =document.querySelector('.guesses')
+const remaining =document.querySelector('.lastResult')
+const lowhi  = document.querySelector('.lowOrhi')
+const startOver =document.querySelector('.resultparas')
+
+const p = document.createElement('p')
+let prevguess = []
+let numguess = 1
+let playGame = true
+
+//step-1 user Enter here
+if(playGame){ 
+      submit.addEventListener('click',function(e){
+      e.preventDefault()//khi bhejna nhi hai
+
+      const userGuess = parseInt(userInput.value) 
+      console.log(userGuess)
+      validateguess(userGuess)//next element  me fwd
+   })
+}
+//step-2 validation game
+function validateguess(userGuess){
+     if(isNaN(userGuess)){ // check if no not int  
+           alert('This is not the valid No') 
+     }
+     else if(userGuess<1){
+     alert('No  is less then 0')// no is less then 0  
+     }
+     else if(userGuess>100){
+      alert('No  is more then 100')// no is less then 0  
+      }
+      else{
+       prevguess.push(userGuess)
+       if(numguess===11){
+         displayguess(userGuess)
+         displayMessage(`Game over. Random no is ${randomNo}`);
+         endgame()
+       }  
+       else{
+         displayguess(userGuess)
+         checkguess(userGuess)
+       }
+      }
+}
+//step-3 checking the user no and random no  
+function checkguess(userGuess){
+  if(userGuess=== randomNo){
+   displayMessage(`your guess is Correct `)
+   endgame()
+  }
+  else if(userGuess < randomNo){
+   displayMessage(`Your guess is too low`)
+  }
+  else if(userGuess > randomNo){
+   displayMessage(`Your guess is too high`)
+  }
+}
+//step-04 reaming input [low(numberguess) or high(remaning guess)]
+function displayguess(userGuess){
+  userInput.value=''
+  guessSlot.innerHTML += `${userGuess}  `
+  numguess++;
+  remaining.innerHTML=`${11-numguess}`
+}
+//step 05 display
+function displayMessage(message){
+  lowhi.innerHTML =`<h2>${message}</h2>`
+}
+//step 06 end the game 
+function endgame(){
+    userInput.value='';
+    userInput.setAttribute('disabled','');
+    p.classList.add('button');
+    p.innerHTML = `<h1 id="newGame">new game</h1>`;
+    startOver.appendChild(p)
+    playGame =false;
+    startnew()
+   }
+//07 start new  game
+function startnew(){
+
+  const newGameButton = document.querySelector('#newGame')
+   newGameButton.addEventListener('click',function(e){
+   randomNo = parseInt(Math.random()*100+1);
+   prevguess=[]
+   numguess=1
+   guessSlot.innerHTML=''
+  // remaining.innerHTML=`${11-numguess}`
+   userInput.removeAttribute('disabled')
+   startOver.removeChild(p)
+   playGame =true
+})
+}
+   
+                </code>
+            </pre>
+       </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+       </div>          
+       <!-- 04-main start here-->
+       <div class="main">       
+        <div class="main2">
+            <pre class="language-javascript" id="prism_str">
+                <code>  
+
+        const searchFun = () => {
+                        //search bar ke liye
+        let filter =document.getElementById('myInput').value.toUpperCase();
+                        //table-->
+        let myTable =document.getElementById('mytable');
+                        //table-->tr(table row)
+        let tr = myTable.getElementsByTagName('tr');
+        for(var i=0;i&lttr.length;i++){
+                            //table data-->me ghusse
+        let td = tr[i].getElementsByTagName('td')[0];
+            if(td){
+            let textvale =td.textContent || td.innerHTML;
+            if(textvale.toUpperCase().indexOf(filter)>-1){
+                tr[i].style.display='';
+                            }
+                            else{
+                                tr[i].style.display='none';
+                            }
+                           }
+                          }
+        }  
+   
+                </code>
+            </pre>
+       </div>
+   
+       <div class="main1">
+        <img  class="photo"src="./assests/serach.png">
+        <h1 class="head">04-Search Bar</h1> 
+        <ol class="desc">
+        
+        
+        
+       </ol>
+        </div>        
+       </div>          
+       <!-- sample main 4 ended here-->
+
+        <!-- sample main 5 started here-->
+       <div class="main">          
+        <div class="main1">
+    <img  class="photo"src="./assests/calc.png">
+    <h1 class="head">05-calculator</h1> 
+    <ol class="desc">
+   
+    </ol>
+    </div>        
+        <div class="main2">
+            <pre class="language-javascript" id="prism_str">
+                <code>  
+
+       let string = "";
+       let buttons = document.querySelectorAll('.button');
+       Array.from(buttons).forEach((button)=>{
+         button.addEventListener('click', (e)=>{
+           if (e.target.innerHTMl == 'D'){
+              string ="";
+              document.querySelector('input').value = string;
+           }   
+           else if(e.target.innerHTML== '='){
+             string = eval(string);
+             document.querySelector('input').value = string;
+           }  
+           else{
+              console.log(e.target)
+              string = string + e.target.innerHTML;
+              document.querySelector('input').value = string; 
+           }
+         })
+       })
+    </code>
+</pre>
+</div>
+</div>          
+<!-- sample main 5 ended here-->
+
+<!--smaple 6 -->
+<div class="main">
+    <div class = "main1">
+        <img class = "photo" src="./assests/Todo.png">
+        <h1 class = "head">06-Todo App</h1> 
+        <ol class = "desc">
+           
+           
+        </ol>
+        </div>                  
+       <div class="main2">
+           <pre class="language-javascript" id="prism_str">
+               <code>  
+const todoInput = document.querySelector(".todo-input");
+const todoButton = document.querySelector(".todo-button");
+const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter-todo");
+
+document.addEventListener("DOMContentLoaded", getLocalTodos);
+todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteCheck);
+filterOption.addEventListener("change", filterTodo);
+
+function addTodo(event) {
+    event.preventDefault();
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todo");
+    const newTodo = document.createElement("li");
+    newTodo.innerText = todoInput.value; 
+    newTodo.classList.add("todo-item");
+    todoDiv.appendChild(newTodo);
+    //ADDING TO LOCAL STORAGE 
+    saveLocalTodos(todoInput.value);
+    
+    const completedButton = document.createElement("button");
+    completedButton.innerHTML = '<i class="fas fa-check-circle"></li>';
+    completedButton.classList.add("complete-btn");
+    todoDiv.appendChild(completedButton);
+
+    const trashButton = document.createElement("button");
+    trashButton.innerHTML = '<i class="fas fa-trash"></li>';
+    trashButton.classList.add("trash-btn");
+    todoDiv.appendChild(trashButton);
+    
+    todoList.appendChild(todoDiv);
+    todoInput.value = "";
+}
+
+function deleteCheck(e) {
+    const item = e.target;
+
+    if(item.classList[0] === "trash-btn") {
+        const todo = item.parentElement;
+        todo.classList.add("slide");
+
+        removeLocalTodos(todo);
+        todo.addEventListener("transitionend", function() {
+            todo.remove();
+        });
+    }
+
+    if(item.classList[0] === "complete-btn") {
+        const todo = item.parentElement;
+        todo.classList.toggle("completed");
+    }
+}
+
+function filterTodo(e) {
+    const todos = todoList.childNodes;
+    todos.forEach(function(todo) {
+        switch(e.target.value) {
+            case "all": 
+                todo.style.display = "flex";
+                break;
+            case "completed": 
+                if(todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+            case "incomplete":
+                if(!todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+        }
+    });
+}
+
+
+
+function saveLocalTodos(todo) {
+    let todos;
+    if(localStorage.getItem("todos") === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    todos.push(todo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function getLocalTodos() {
+    let todos;
+    if(localStorage.getItem("todos") === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    todos.forEach(function(todo) {
+        const todoDiv = document.createElement("div");
+        todoDiv.classList.add("todo");
+        const newTodo = document.createElement("li");
+        newTodo.innerText = todo;
+        newTodo.classList.add("todo-item");
+        todoDiv.appendChild(newTodo);
+
+        const completedButton = document.createElement("button");
+        completedButton.innerHTML = '<i class="fas fa-check-circle"></li>';
+        completedButton.classList.add("complete-btn");
+        todoDiv.appendChild(completedButton);
+
+        const trashButton = document.createElement("button");
+        trashButton.innerHTML = '<i class="fas fa-trash"></li>';
+        trashButton.classList.add("trash-btn");
+        todoDiv.appendChild(trashButton);
+
+        todoList.appendChild(todoDiv);
+    });
+}
+
+function removeLocalTodos(todo) {
+    let todos;
+    if(localStorage.getItem("todos") === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    const todoIndex = todo.children[0].innerText;
+    todos.splice(todos.indexOf(todoIndex), 1);
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+    </code>
+</pre>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+</div>    
+<!--07-Todo-->
+<div class="main">          
+    <div class="main1">
+        <img class="photo"src="./assests/pass.png">
+        <h1 class="head">07-Pass Generator</h1> 
+        <ol class="desc">
+        </ol>
+        </div>        
+<div class="main2">
+   <pre class="language-javascript" id="prism_str">
+       <code>  
+ 
+
+const inputSlider = document.querySelector("[data-lengthSlider]");
+const lengthDisplay = document.querySelector("[data-lengthNumber]");
+
+const passwordDisplay = document.querySelector("[data-passwordDisplay]");
+const copyBtn = document.querySelector("[data-copy]");
+const copyMsg = document.querySelector("[data-copyMsg]");
+const uppercaseCheck = document.querySelector("#uppercase");
+const lowercaseCheck = document.querySelector("#lowercase");
+const numbersCheck = document.querySelector("#numbers");
+const symbolsCheck = document.querySelector("#symbols");
+const indicator = document.querySelector("[data-indicator]");
+const generateBtn = document.querySelector(".generateButton");
+const allCheckBox = document.querySelectorAll("input[type=checkbox]");
+const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+
+
+//initially
+let password = "";
+let passwordLength = 10;
+let checkCount = 0;
+handleSlider();
+//ste strength circle color to grey
+setIndicator("#ccc");
+
+//set passwordLength
+function handleSlider() {
+    inputSlider.value = passwordLength;
+    lengthDisplay.innerText = passwordLength;
+    //or kuch bhi karna chahiye ? - HW
+    const min=inputSlider.min;
+    const max=inputSlider.max;
+    inputSlider.style.backgroundSize=((passwordLength-min)*100/(max-min))+ "% 100%"
+}
+
+function setIndicator(color) {
+    indicator.style.backgroundColor = color;
+    //shadow - HW
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function generateRandomNumber() {
+    return getRndInteger(0,9);
+}
+
+function generateLowerCase() {  
+       return String.fromCharCode(getRndInteger(97,123))
+}
+
+function generateUpperCase() {  
+    return String.fromCharCode(getRndInteger(65,91))
+}
+
+function generateSymbol() {
+    const randNum = getRndInteger(0, symbols.length);
+    return symbols.charAt(randNum);
+}
+
+function calcStrength() {
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNum = false;
+    let hasSym = false;
+    if (uppercaseCheck.checked) hasUpper = true;
+    if (lowercaseCheck.checked) hasLower = true;
+    if (numbersCheck.checked) hasNum = true;
+    if (symbolsCheck.checked) hasSym = true;
+  
+    if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
+      setIndicator("#0f0");
+    } else if (
+      (hasLower || hasUpper) &&
+      (hasNum || hasSym) &&
+      passwordLength >= 6
+    ) {
+      setIndicator("#ff0");
+    } else {
+      setIndicator("#f00");
+    }
+}
+
+async function copyContent() {
+    try {
+        await navigator.clipboard.writeText(passwordDisplay.value);
+        copyMsg.innerText = "copied";
+    }
+    catch(e) {
+        copyMsg.innerText = "Failed";
+    }
+    //to make copy wala span visible
+    copyMsg.classList.add("active");
+
+    setTimeout( () => {
+        copyMsg.classList.remove("active");
+    },2000);
+
+}
+
+function shufflePassword(array) {
+    //Fisher Yates Method
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    let str = "";
+    array.forEach((el) => (str += el));
+    return str;
+}
+
+function handleCheckBoxChange() {
+    checkCount = 0;
+    allCheckBox.forEach( (checkbox) => {
+        if(checkbox.checked)
+            checkCount++;
+    });
+
+    //special condition
+    if(passwordLength < checkCount ) {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+allCheckBox.forEach( (checkbox) => {
+    checkbox.addEventListener('change', handleCheckBoxChange);
+})
+
+
+inputSlider.addEventListener('input', (e) => {
+    passwordLength = e.target.value;
+    handleSlider();
+})
+
+
+copyBtn.addEventListener('click', () => {
+    if(passwordDisplay.value)
+        copyContent();
+})
+console.log("hello")
+
+generateBtn.addEventListener('click', () => {
+    //none of the checkbox are selected
+
+    if(checkCount == 0) 
+        return;
+
+    if(passwordLength < checkCount) {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+
+    // let's start the jouney to find new password
+    console.log("Starting the Journey");
+    //remove old password
+    password = "";
+
+    //let's put the stuff mentioned by checkboxes
+
+    // if(uppercaseCheck.checked) {
+    //     password += generateUpperCase();
+    // }
+
+    // if(lowercaseCheck.checked) {
+    //     password += generateLowerCase();
+    // }
+
+    // if(numbersCheck.checked) {
+    //     password += generateRandomNumber();
+    // }
+
+    // if(symbolsCheck.checked) {
+    //     password += generateSymbol();
+    // }
+
+    let funcArr = [];
+
+    if(uppercaseCheck.checked)
+        funcArr.push(generateUpperCase);
+
+    if(lowercaseCheck.checked)
+        funcArr.push(generateLowerCase);
+
+    if(numbersCheck.checked)
+        funcArr.push(generateRandomNumber);
+
+    if(symbolsCheck.checked)
+        funcArr.push(generateSymbol);
+
+    //compulsory addition
+    for(let i=0; i<funcArr.length; i++) {
+        password += funcArr[i]();
+    }
+    console.log("COmpulsory adddition done");
+
+    //remaining adddition
+    for(let i=0; i<passwordLength-funcArr.length; i++) {
+        let randIndex = getRndInteger(0 , funcArr.length);
+        console.log("randIndex" + randIndex);
+        password += funcArr[randIndex]();
+    }
+    console.log("Remaining adddition done");
+    //shuffle the password
+    password = shufflePassword(Array.from(password));
+    console.log("Shuffling done");
+    //show in UI
+    passwordDisplay.value = password;
+    console.log("UI adddition done");
+    //calculate strength
+    calcStrength();
+});
+
+</code>
+</pre>
+</div>
+</div>
+
+
+
+<!--08 tic tac toe-->
+<div class="main">           
+<div class="main2">
+   <pre class="language-javascript" id="prism_str">
+       <code>  
+
+
+/*const boxes=document.querySelectorAll(".box");
+const gameInfo=document.querySelectorAll(".game-info");
+const newGameBtn=document.querySelectorAll(".btn");
+let currentPlayer;
+let gameGrid;
+const winningPositions=[
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
+
+
+	];
+
+//let's create a function to initialize the game
+
+function initGame(){
+	currentPlayer="X";
+	gameGrid=["","","","","","","","",""];
+	newGameBtn.classlist.remove("active");
+	gameInfo.innerText=`currentPlayer-${currentPlayer}`;
+
+}
+initGame();
+function swapTurn(){
+  if(currentPlayer==="X")
+  {
+  	currentPlayer="O"
+  }
+  else{
+  	currentPlayer="X";
+  }
+  //ui update
+  gameInfo.innerText=`currentPlayer-${currentPlayer}`;
+
+}
+
+function handleClick(index){
+
+if(gameGrid[index] ===""){
+	boxes[index].innerText = currentPlayer;
+	gameGrid[index]=currentPlayer;
+    boxes[index].style.pointerEvents="none";
+
+	//swap karo turn ko
+	swapTurn();
+	//check
+	checkGameOver();
+
+}
+}
+
+boxes.forEach((box,index)=>{
+	box.addEventlistner("click",()=>{
+		handleClick(index);
+	})
+}); 
+*/
+const boxes = document.querySelectorAll(".box");
+const gameInfo = document.querySelector(".game-info");
+const newGameBtn = document.querySelector(".btn");
+
+
+let currentPlayer;
+let gameGrid;
+
+const winningPositions = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
+
+//let's create a function to initialise the game
+function initGame() {
+    currentPlayer = "X";
+    gameGrid = ["","","","","","","","",""];
+    //UI pr empty bhi karna padega boxes ko
+    boxes.forEach((box, index) => {
+        box.innerText = "";
+        boxes[index].style.pointerEvents = "all";
+        //one more thing is missing, initialise box with css properties again
+        box.classList = `box box${index+1}`;
+    });
+    newGameBtn.classList.remove("active");
+    gameInfo.innerText = `Current Player - ${currentPlayer}`;
+}
+
+initGame();
+
+function swapTurn() {
+    if(currentPlayer === "X") {
+        currentPlayer = "O";
+    }
+    else {
+        currentPlayer = "X";
+    }
+    //UI Update
+    gameInfo.innerText = `Current Player - ${currentPlayer}`;
+}
+
+function checkGameOver() {
+    let answer = "";
+
+    winningPositions.forEach((position) => {
+        //all 3 boxes should be non-empty and exactly same in value
+        if( (gameGrid[position[0]] !== "" || gameGrid[position[1]] !== "" || gameGrid[position[2]] !== "") 
+            && (gameGrid[position[0]] === gameGrid[position[1]] ) && (gameGrid[position[1]] === gameGrid[position[2]])) {
+
+                //check if winner is X
+                if(gameGrid[position[0]] === "X") 
+                    answer = "X";
+                else {
+                    answer = "O";
+                } 
+                    
+
+                //disable pointer events
+                boxes.forEach((box) => {
+                    box.style.pointerEvents = "none";
+                })
+
+                //now we know X/O is a winner
+                boxes[position[0]].classList.add("win");
+                boxes[position[1]].classList.add("win");
+                boxes[position[2]].classList.add("win");
+            }
+    });
+
+    //it means we have a winner
+    if(answer !== "" ) {
+        gameInfo.innerText = `Winner Player - ${answer}`;
+        newGameBtn.classList.add("active");
+        return;
+    }
+
+    //We know, NO Winner Found, let's check whether there is tie
+    let fillCount = 0;
+    gameGrid.forEach((box) => {
+        if(box !== "" )
+            fillCount++;
+    });
+
+    //board is Filled, game is TIE
+    if(fillCount === 9) {
+        gameInfo.innerText = "Game Tied !";
+        newGameBtn.classList.add("active");
+    }
+
+}
+
+function handleClick(index) {
+    if(gameGrid[index] === "" ) {
+        boxes[index].innerText = currentPlayer;
+        gameGrid[index] = currentPlayer;
+        boxes[index].style.pointerEvents = "none";
+        //swap karo turn ko
+        swapTurn();
+        //check koi jeet toh nahi gya
+        checkGameOver();
+    }
+}
+
+boxes.forEach((box, index) => {
+    box.addEventListener("click", () => {
+        handleClick(index);
+    })
+});
+
+newGameBtn.addEventListener("click", initGame);
+
+</code>
+</pre>
+</div>
+<div class="main1">
+    <img class="photo"src="./assests/tictactoe.png">
+    <h1 class="head">08-Tic tac toe</h1> 
+    <ol class="desc">
+    </ol>
+    </div>        
+</div>
+<!--08 end here -->
+
+<!--09 start here-->
+<div class="main">           
+    <div class="main2">
+       <pre class="language-javascript" id="prism_str">
+           <code>  
+
+
+console.log("Welcome to Spotify");
+
+// Initialize the Variables
+let songIndex = 0;
+let audioElement = new Audio('songs/1.mp3');
+let masterPlay = document.getElementById('masterPlay');
+let myProgressBar = document.getElementById('myProgressBar');
+let gif = document.getElementById('gif');
+let masterSongName = document.getElementById('masterSongName');
+let songItems = Array.from(document.getElementsByClassName('songItem'));
+
+let songs = [
+    {songName: "Rasiya", filePath: "songs/1.mp3", coverPath: "logo.png"},
+    {songName: "Deva", filePath: "songs/2.mp3", coverPath: "logo.png"},
+    {songName: "Ram-siya", filePath: "songs/3.mp3", coverPath: "logo.png"},
+    {songName: "Beshram-Rang", filePath: "songs/4.mp3", coverPath: "logo.png"},
+    {songName: "jhoome jo", filePath: "songs/5.mp3", coverPath: "logo.png"},
+    {songName: "tere vaste", filePath: "songs/2.mp3", coverPath: "logo.png"},
+    {songName: "baby tujhe", filePath: "songs/2.mp3", coverPath: "logo.png"},
+    {songName: "Bhula Dena ", filePath: "songs/2.mp3", coverPath: "logo.png"},
+    {songName: "Tumhari Kasam  ", filePath: "songs/2.mp3", coverPath: "logo.png"},
+    {songName: "Na Jaana ", filePath: "songs/4.mp3", coverPath: "logo.png"},
+]
+
+songItems.forEach((element, i)=>{ 
+    element.getElementsByTagName("img")[0].src = songs[i].coverPath; 
+    element.getElementsByClassName("songName")[0].innerText = songs[i].songName; 
+})
+ 
+
+// Handle play/pause click
+masterPlay.addEventListener('click', ()=>{
+    if(audioElement.paused || audioElement.currentTime<=0){
+        audioElement.play();
+        masterPlay.classList.remove('fa-play-circle');
+        masterPlay.classList.add('fa-pause-circle');
+        gif.style.opacity = 1;
+    }
+    else{
+        audioElement.pause();
+        masterPlay.classList.remove('fa-pause-circle');
+        masterPlay.classList.add('fa-play-circle');
+        gif.style.opacity = 0;
+    }
+})
+// Listen to Events
+audioElement.addEventListener('timeupdate', ()=>{ 
+    // Update Seekbar
+    progress = parseInt((audioElement.currentTime/audioElement.duration)* 100); 
+    myProgressBar.value = progress;
+})
+
+myProgressBar.addEventListener('change', ()=>{
+    audioElement.currentTime = myProgressBar.value * audioElement.duration/100;
+})
+
+const makeAllPlays = ()=>{
+    Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
+        element.classList.remove('fa-pause-circle');
+        element.classList.add('fa-play-circle');
+    })
+}
+
+Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
+    element.addEventListener('click', (e)=>{ 
+        makeAllPlays();
+        songIndex = parseInt(e.target.id);
+        e.target.classList.remove('fa-play-circle');
+        e.target.classList.add('fa-pause-circle');
+        audioElement.src = `songs/${songIndex+1}.mp3`;
+        masterSongName.innerText = songs[songIndex].songName;
+        audioElement.currentTime = 0;
+        audioElement.play();
+        gif.style.opacity = 1;
+        masterPlay.classList.remove('fa-play-circle');
+        masterPlay.classList.add('fa-pause-circle');
+    })
+})
+
+document.getElementById('next').addEventListener('click', ()=>{
+    if(songIndex>=9){
+        songIndex = 0
+    }
+    else{
+        songIndex += 1;
+    }
+    audioElement.src = `songs/${songIndex+1}.mp3`;
+    masterSongName.innerText = songs[songIndex].songName;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlay.classList.remove('fa-play-circle');
+    masterPlay.classList.add('fa-pause-circle');
+
+})
+
+document.getElementById('previous').addEventListener('click', ()=>{
+    if(songIndex<=0){
+        songIndex = 0
+    }
+    else{
+        songIndex -= 1;
+    }
+    audioElement.src = `songs/${songIndex+1}.mp3`;
+    masterSongName.innerText = songs[songIndex].songName;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlay.classList.remove('fa-play-circle');
+    masterPlay.classList.add('fa-pause-circle');
+})
+
+</code>
+</pre>
+</div>
+<div class="main1">
+    <img class="photo"src="./assests/music.png">
+    <h1 class="head">09-Music player</h1> 
+    <ol class="desc">
+    </ol>
+    </div>        
+</div>
+
+
+</body>
+</html>
