@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding:0;
+}
+body{
+    background-color:whitesmoke;
+}
+.logo img{
+    width: 40px;
+    height: 40px;
+}
+nav{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: aliceblue;
+    height:60px;
+    font-style:italic; 
+}
+.container{
+     width: 50vw;
+     margin: auto;
+     padding: 32px 0;
+     background-color:white;
+     text-decoration: none;
+}
+.container ol{
+    padding-left:3%;
+    font-weight: bolder;
+}
+.toolbar-item button{
+    cursor: pointer!important;
+    color:white!important;
+    border: 2px solid wheat !important;
+    border-radius:15px !important;
+    background-color: red !important;
+   
+}
+.main{
+    width:90vw;
+
+    border: 2px solid black; 
+     display: flex; 
+    margin-top: 1%;
+    margin-left:5vw;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.main1{
+    width:80vw;
+     /* border:2px solid black; */
+    margin:2%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.main2{
+  width:80vw;
+}
+#prism_str{
+  height:80vh;
+  width:60vw;
+}
+.photo{
+    /* border:2px solid blueviolet; */
+    height:200px;
+    width:240px;
+    /* margin-left: 20%; */
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}.head{
+    color: brown;
+}
+.desc{
+    /* border:2px solid greenyellow; */
+    color:grey;
+    margin-left: 14%;
+    /* display:inline; */
+}
